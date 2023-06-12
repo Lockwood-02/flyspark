@@ -4,6 +4,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import Home from './pages/Home';
 import Products from './pages/Products';
+import Cart from './pages/Cart';
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
+          <Route path="/cart" element={<Cart />} />
           {/* Add more routes for additional pages */}
         </Routes>
         <Footer />

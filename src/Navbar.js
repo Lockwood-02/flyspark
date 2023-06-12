@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { HiShoppingCart } from 'react-icons/hi'
 
 const Navbar = () => {
     const [activeLink, setActiveLink] = useState('home');
@@ -30,8 +31,7 @@ const Navbar = () => {
     }, []);
 
     return (
-        <nav className={`fixed top-0 left-0 right-0 z-10 bg-stone-100 transition-all ${isScrolled ? 'py-2 shadow-lg' : 'py-4'
-            }`}>
+        <nav className={`fixed top-0 left-0 right-0 z-10 bg-stone-100 transition-all ${isScrolled ? 'py-2 shadow-lg' : 'py-4'}`}>
             <div className="">
                 <div className="grid grid-cols-3 gap-4 items-center h-16">
                     <div className="col-span-1 hidden md:block">
@@ -57,18 +57,20 @@ const Navbar = () => {
                             </div>
                         </div>
                     </div>
+
                     <div className='col-span-1'>
                         <div className="flex items-center justify-center">
                             {/* Replace the logo image URL with your own */}
                             {/* <img className="h-12 w-12 rounded-xl" src={require('./images/Logo.png')} alt="Logo" /> */}
                             <h1 className="font-bold text-2xl text-stone-900 ml-8 md:ml-0">
-                                <span className={activeLink === 'products' ? 'pr-4' : 'px-4'}>
+                                <span>
                                     FLYSPARK
                                 </span>
                             </h1>
                         </div>
                     </div>
-                    <div className="md:hidden col-span-2 flex justify-end">
+
+                    <div className="md:hidden col-span-2 flex justify-end mr-8">
                         <button
                             onClick={handleMenuToggle}
                             className="md:hidden text-stone-900 focus:outline-none"
@@ -122,19 +124,30 @@ const Navbar = () => {
                                     Products
                                 </Link>
                                 {/* Add more navigation links as needed */}
+                                <Link
+                                    to="/cart"
+                                    className={`${activeLink === 'cart'
+                                        ? 'text-stone-900 font-bold'
+                                        : 'text-stone-500 hover:text-stone-900'
+                                        } block px-4 py-2 text-sm`}
+                                    onClick={() => {
+                                        handleLinkClick('cart');
+                                        handleMenuToggle();
+                                    }}
+                                >
+                                    Cart
+                                </Link>
                             </div>
                         )}
-                        <Link to="/cart" className="ml-4">
+                    </div>
+
+                    {/* Cart symbol for medium screens or larger */}
+                    <div className="hidden md:flex col-span-1 items-center justify-end mr-24">
+                        <Link to="/cart" className={`${activeLink === 'cart' ? 'text-stone-900 font-bold' : 'text-stone-500 hover:text-stone-900'
+                            } px-3 py-2 rounded-md text-xl`}
+                            onClick={() => handleLinkClick('cart')}>
                             {/* Add your cart icon here */}
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                className="h-6 w-6 text-stone-900"
-                            >
-                                {/* Add your cart icon SVG path here */}
-                            </svg>
+                            <HiShoppingCart className='w-8 h-8' />
                         </Link>
                     </div>
                 </div>
